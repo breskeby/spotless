@@ -1,8 +1,9 @@
 anchors:
   env_gradle: &env_gradle
     environment:
-      _JAVA_OPTIONS: "-Xmx3g"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+      # java doesn't play nice with containers, it tries to hog the entire machine
+      _JAVA_OPTIONS: "-Xmx1g" # the integration tests spawn a lot of processes, each should be small
+      GRADLE_OPTS: "-Dorg.gradle.workers.max=2" # and we're only allowed to use 2 vCPUs
     docker:
       - image: cimg/openjdk:8.0
 
