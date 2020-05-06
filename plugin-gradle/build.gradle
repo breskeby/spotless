@@ -34,6 +34,9 @@ test {
 	useJUnit {
 		excludeCategories 'com.diffplug.spotless.category.NpmTest'
 	}
+	forkEvery 100
+	maxHeapSize '512m'
+	jvmArgs '-Xmx512m', '-Xms512m'
 }
 
 task npmTest(type: Test) {
